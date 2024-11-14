@@ -580,13 +580,12 @@ export default function Home() {
 
 
       {/* Services Section */}
-      <section id="services" className="py-32 bg-gradient-to-b from-gray-900 via-black to-gray-900 relative overflow-hidden">
+      <section id="services" className="py-32 bg-gradient-to-b from-black via-gray-900 to-black relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[url('/grid.png')] opacity-5" />
           <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-transparent to-purple-900/10" />
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-gray-900 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-900 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
           {/* Animated Gradient Orbs */}
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-[128px] animate-pulse" />
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[128px] animate-pulse delay-1000" />
