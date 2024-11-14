@@ -5,10 +5,16 @@ import { useState } from "react";
 import Link from "next/link";
 
 type VehicleType = 'sedan' | 'suv' | 'truck';
+type LocationType = 'mobile' | 'shop';
 
 interface Service {
   name: string;
   prices: {
+    sedan: number;
+    suv: number;
+    truck: number;
+  };
+  mobilePricing?: {
     sedan: number;
     suv: number;
     truck: number;
@@ -27,6 +33,7 @@ interface AddOn {
 
 export default function Booking() {
   const [selectedVehicle, setSelectedVehicle] = useState<VehicleType>('sedan');
+  const [selectedLocation, setSelectedLocation] = useState<LocationType>('shop');
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
 
@@ -37,6 +44,11 @@ export default function Booking() {
         sedan: 225,
         suv: 250,
         truck: 275
+      },
+      mobilePricing: {
+        sedan: 275,
+        suv: 300,
+        truck: 325
       },
       features: [
         "Complete Interior & Exterior",
@@ -54,6 +66,11 @@ export default function Booking() {
         suv: 140,
         truck: 160
       },
+      mobilePricing: {
+        sedan: 170,
+        suv: 190,
+        truck: 210
+      },
       features: [
         "Deep Vacuum & Clean",
         "Dashboard & Console Detail",
@@ -68,6 +85,11 @@ export default function Booking() {
         sedan: 120,
         suv: 140,
         truck: 160
+      },
+      mobilePricing: {
+        sedan: 170,
+        suv: 190,
+        truck: 210
       },
       features: [
         "Iron Decontamination & Bug/Tar Removal",
@@ -100,7 +122,9 @@ export default function Booking() {
     const service = services.find(s => s.name === selectedService);
     if (!service) return 0;
 
-    let total = service.prices[selectedVehicle];
+    let total = selectedLocation === 'mobile' && service.mobilePricing 
+      ? service.mobilePricing[selectedVehicle]
+      : service.prices[selectedVehicle];
     
     selectedAddOns.forEach(addon => {
       const addOnItem = addOns.find(a => a.name === addon);
@@ -184,6 +208,59 @@ export default function Booking() {
                 } text-white capitalize`}
               >
                 {type}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Location Selection */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="mb-12"
+        >
+          <h2 className="text-xl font-semibold text-white mb-4">Service Location</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {(['shop', 'mobile'] as LocationType[]).map((type) => (
+              <button
+                key={type}
+                onClick={() => setSelectedLocation(type)}
+                className={`p-6 rounded-xl border transition-all ${
+                  selectedLocation === type
+                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 border-blue-500'
+                    : 'bg-gray-900/50 border-gray-800 hover:border-blue-500/50'
+                } text-white`}
+              >
+                <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+                  {type === 'shop' ? (
+                    <svg className="w-8 h-8 sm:w-6 sm:h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                  ) : (
+                    <svg className="w-8 h-8 sm:w-6 sm:h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  )}
+                  <div className="flex-1">
+                    <div className="text-lg font-semibold mb-1">
+                      <span className="capitalize">{type} Service</span>
+                    </div>
+                    <div className="text-sm text-gray-400">
+                      {type === 'shop' 
+                        ? 'Drop off at our location in Cape May County' 
+                        : 'We come to you (Cape May County area)'}
+                    </div>
+                  </div>
+                </div>
+                {selectedLocation === type && (
+                  <div className="mt-4 pt-4 border-t border-white/10 text-sm text-blue-300">
+                    {type === 'shop' 
+                      ? '📍 1234 Ocean Drive, Cape May, NJ' 
+                      : '🚗 Additional travel fee included in price'}
+                  </div>
+                )}
               </button>
             ))}
           </div>
@@ -277,7 +354,7 @@ export default function Booking() {
               <div className="text-3xl font-bold text-white">${calculateTotal()}</div>
             </div>
             <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all">
-              Proceed to Booking
+              Proceed to Payment
             </button>
           </motion.div>
         )}
