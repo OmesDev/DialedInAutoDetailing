@@ -52,7 +52,7 @@ export default function Home() {
     <div className="min-h-screen bg-[#fafafa] font-[family-name:var(--font-geist-sans)]">
       {/* Navbar */}
       <nav className="fixed w-full bg-white/90 backdrop-blur-md shadow-md z-50 transition-all duration-300">
-        <div className="container mx-auto px-6 py-4">
+        <div className="w-full container mx-auto px-4 sm:px-6 py-4">
           <div className="flex justify-between items-center">
             {/* Logo Section */}
             <div className="flex items-center gap-2">
@@ -182,7 +182,7 @@ export default function Home() {
           <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-black to-transparent" />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
+        <div className="w-full container mx-auto px-4 sm:px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -404,8 +404,8 @@ export default function Home() {
       </section>
 
       {/* Packages Section */}
-      <section id="packages" className="py-32 bg-gradient-to-b from-[#fafafa] to-white">
-        <div className="container mx-auto px-6">
+      <section id="packages" className="py-32 bg-gradient-to-b from-[#fafafa] to-white w-full">
+        <div className="w-full container mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
