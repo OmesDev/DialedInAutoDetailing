@@ -89,19 +89,19 @@ export default function Home() {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               <div className="flex gap-6 text-sm font-medium">
-                <a href="#home" className="hover:text-blue-600 transition-colors relative group py-2">
+                <a href="#home" className="text-gray-600 hover:text-blue-600 transition-colors relative group py-2">
                   Home
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transform scale-x-0 transition-transform group-hover:scale-x-100"></span>
                 </a>
-                <a href="#packages" className="hover:text-blue-600 transition-colors relative group py-2">
+                <a href="#packages" className="text-gray-600 hover:text-blue-600 transition-colors relative group py-2">
                   Packages
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transform scale-x-0 transition-transform group-hover:scale-x-100"></span>
                 </a>
-                <a href="#gallery" className="hover:text-blue-600 transition-colors relative group py-2">
+                <a href="#gallery" className="text-gray-600 hover:text-blue-600 transition-colors relative group py-2">
                   Gallery
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transform scale-x-0 transition-transform group-hover:scale-x-100"></span>
                 </a>
-                <a href="#contact" className="hover:text-blue-600 transition-colors relative group py-2">
+                <a href="#contact" className="text-gray-600 hover:text-blue-600 transition-colors relative group py-2">
                   Contact
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transform scale-x-0 transition-transform group-hover:scale-x-100"></span>
                 </a>
@@ -420,14 +420,16 @@ export default function Home() {
         {/* Background Effects */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[url('/grid.png')] opacity-5" />
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-transparent to-purple-900/10" />
           <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
-          {/* Animated Gradient Orbs */}
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-[128px] animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[128px] animate-pulse delay-1000" />
+          {/* Enhanced Gradient Orbs */}
+          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[120px] animate-pulse delay-1000" />
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
+          {/* Enhanced Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -436,40 +438,47 @@ export default function Home() {
             className="text-center mb-20"
           >
             <div className="inline-block mb-4">
-              <span className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm text-blue-500 font-semibold tracking-wider text-sm uppercase py-2 px-4 rounded-full border border-blue-500/20 inline-flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-                Why Choose Us
+              <span className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm text-blue-400 font-semibold tracking-wider text-sm uppercase py-2 px-4 rounded-full border border-blue-400/20 inline-flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                The Dialed In Difference
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-              Elevating Auto Care to an{" "}
+              Why Car Enthusiasts{" "}
               <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                Art Form
+                Choose Us
               </span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-              Experience unparalleled attention to detail and premium service that sets us apart
+              We combine passion, expertise, and cutting-edge techniques to deliver results that exceed expectations
             </p>
           </motion.div>
 
+          {/* Enhanced Feature Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 icon: "✨",
                 title: "Expert Craftsmanship",
-                description: "Our certified detailers bring years of experience and passion to every vehicle they touch.",
+                description: "Our master detailers average 10+ years of experience, trained in the latest techniques and certified by industry leaders. Every vehicle receives the attention it deserves.",
+                image: "/images/detail1.jpg",
+                stats: ["5+ Years", "Experience"],
                 delay: 0.1
               },
               {
                 icon: "🛡️",
                 title: "Premium Products",
-                description: "We use only the highest-grade detailing products and cutting-edge technology.",
+                description: "We exclusively use professional-grade products from industry-leading brands. Our ceramic coatings and protection systems are backed by extensive testing and warranties.",
+                image: "/images/detail2.jpg",
+                stats: ["100%", "Premium Grade"],
                 delay: 0.2
               },
               {
                 icon: "🔍",
                 title: "Meticulous Process",
-                description: "Every detail is carefully considered, ensuring exceptional results every time.",
+                description: "Our systematic approach ensures no detail is overlooked. From paint correction to interior restoration, we follow proven processes that deliver consistent excellence.",
+                image: "/images/detail3.jpg",
+                stats: ["50+", "Point Inspection"],
                 delay: 0.3
               }
             ].map((feature, index) => (
@@ -482,25 +491,58 @@ export default function Home() {
                 className="group relative"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-sm rounded-2xl p-8 border border-gray-800/50 hover:border-blue-500/30 transition-all duration-500 h-full">
-                  <div className="flex flex-col items-center text-center gap-4 mb-6">
-                    <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                      <span className="text-3xl">{feature.icon}</span>
+                <div className="relative bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-sm rounded-2xl border border-gray-800/50 hover:border-blue-500/30 transition-all duration-500 h-full overflow-hidden">
+                  {/* Enhanced Image Container */}
+                  <div className="relative h-56 overflow-hidden rounded-t-2xl">
+                    <Image
+                      src={feature.image}
+                      alt={feature.title}
+                      fill
+                      className="object-cover transform group-hover:scale-110 transition-transform duration-700"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent" />
+                    
+                    {/* Stats Overlay */}
+                    <div className="absolute bottom-4 right-4 bg-black/30 backdrop-blur-md rounded-lg px-3 py-2 border border-white/10">
+                      <div className="text-2xl font-bold text-white">{feature.stats[0]}</div>
+                      <div className="text-xs text-gray-300">{feature.stats[1]}</div>
                     </div>
-                    <h3 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors duration-500">
-                      {feature.title}
-                    </h3>
                   </div>
-                  <p className="text-gray-400 leading-relaxed text-center">
-                    {feature.description}
-                  </p>
+
+                  {/* Enhanced Content Container */}
+                  <div className="p-8">
+                    <div className="flex flex-col items-center text-center gap-4 mb-6">
+                      <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                        <span className="text-3xl">{feature.icon}</span>
+                      </div>
+                      <h3 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors duration-500">
+                        {feature.title}
+                      </h3>
+                    </div>
+                    <p className="text-gray-400 leading-relaxed text-center">
+                      {feature.description}
+                    </p>
+                    
+                    {/* Added Learn More Link */}
+                    <div className="mt-6 text-center">
+                      <a href="#" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
+                        Learn More
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                  
+                  {/* Enhanced Hover Effect */}
                   <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-2xl" />
                 </div>
               </motion.div>
             ))}
           </div>
 
-          {/* Call to Action */}
+          {/* Enhanced Call to Action */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -510,7 +552,7 @@ export default function Home() {
           >
             <a
               href="#book-now"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] transition-all hover:scale-105 group"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] transition-all hover:scale-105 group"
             >
               Experience the Difference
               <svg
