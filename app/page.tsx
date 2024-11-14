@@ -44,7 +44,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, 7000);
     return () => clearInterval(timer);
   }, [slides.length]);
 
@@ -412,6 +412,122 @@ export default function Home() {
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className="py-32 bg-gradient-to-b from-black via-gray-900 to-black relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[url('/grid.png')] opacity-5" />
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
+          {/* Animated Gradient Orbs */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-[128px] animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[128px] animate-pulse delay-1000" />
+        </div>
+
+        <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <div className="inline-block mb-4">
+              <span className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm text-blue-500 font-semibold tracking-wider text-sm uppercase py-2 px-4 rounded-full border border-blue-500/20 inline-flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                Why Choose Us
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              Elevating Auto Care to an{" "}
+              <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                Art Form
+              </span>
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+              Experience unparalleled attention to detail and premium service that sets us apart
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: "✨",
+                title: "Expert Craftsmanship",
+                description: "Our certified detailers bring years of experience and passion to every vehicle they touch.",
+                delay: 0.1
+              },
+              {
+                icon: "🛡️",
+                title: "Premium Products",
+                description: "We use only the highest-grade detailing products and cutting-edge technology.",
+                delay: 0.2
+              },
+              {
+                icon: "🔍",
+                title: "Meticulous Process",
+                description: "Every detail is carefully considered, ensuring exceptional results every time.",
+                delay: 0.3
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: feature.delay }}
+                viewport={{ once: true }}
+                className="group relative"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-sm rounded-2xl p-8 border border-gray-800/50 hover:border-blue-500/30 transition-all duration-500 h-full">
+                  <div className="flex flex-col items-center text-center gap-4 mb-6">
+                    <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                      <span className="text-3xl">{feature.icon}</span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors duration-500">
+                      {feature.title}
+                    </h3>
+                  </div>
+                  <p className="text-gray-400 leading-relaxed text-center">
+                    {feature.description}
+                  </p>
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-2xl" />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Call to Action */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            viewport={{ once: true }}
+            className="mt-20 text-center"
+          >
+            <a
+              href="#book-now"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] transition-all hover:scale-105 group"
+            >
+              Experience the Difference
+              <svg
+                className="w-5 h-5 transform transition-transform group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
+            </a>
+          </motion.div>
         </div>
       </section>
 
