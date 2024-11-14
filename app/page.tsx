@@ -12,6 +12,7 @@ type Slide = {
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const slides: Slide[] = [
     {
@@ -48,27 +49,37 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [slides.length]);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isMobileMenuOpen]);
+
   return (
     <div className="min-h-screen bg-[#fafafa] font-[family-name:var(--font-geist-sans)]">
       {/* Navbar */}
       <nav className="fixed w-full bg-white/90 backdrop-blur-md shadow-md z-50 transition-all duration-300">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            {/* Mobile Menu Button - Moved to left */}
-            <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors md:hidden">
-              <svg 
-                className="w-5 h-5 text-black"
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M4 6h16M4 12h16M4 18h16" 
-                />
-              </svg>
+            {/* Mobile Menu Button - Enhanced */}
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 rounded-lg hover:bg-gray-100 transition-colors md:hidden relative z-50"
+              aria-label="Toggle menu"
+            >
+              <div className="w-6 h-6 flex flex-col justify-center items-center">
+                <span className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
+                  isMobileMenuOpen ? 'rotate-45 translate-y-1' : '-translate-y-0.5'
+                }`} />
+                <span className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 ${
+                  isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
+                }`} />
+                <span className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
+                  isMobileMenuOpen ? '-rotate-45 -translate-y-1' : 'translate-y-0.5'
+                }`} />
+              </div>
             </button>
 
             {/* Logo Section */}
@@ -163,23 +174,92 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Mobile Menu (Hidden by default) */}
-        <div className="hidden md:hidden px-6 py-4 bg-white border-t">
-          <div className="flex flex-col gap-4">
-            <a href="#home" className="text-gray-600 hover:text-blue-600 transition-colors">
-              Home
-            </a>
-            <a href="#packages" className="text-gray-600 hover:text-blue-600 transition-colors">
-              Packages
-            </a>
-            <a href="#gallery" className="text-gray-600 hover:text-blue-600 transition-colors">
-              Gallery
-            </a>
-            <a href="#contact" className="text-gray-600 hover:text-blue-600 transition-colors">
-              Contact
-            </a>
+        {/* Enhanced Mobile Menu */}
+        <motion.div 
+          initial="closed"
+          animate={isMobileMenuOpen ? "open" : "closed"}
+          variants={{
+            open: { 
+              opacity: 1,
+              height: "auto",
+              transition: {
+                type: "spring",
+                stiffness: 300,
+                damping: 30
+              }
+            },
+            closed: { 
+              opacity: 0,
+              height: 0,
+              transition: {
+                type: "spring",
+                stiffness: 300,
+                damping: 30
+              }
+            }
+          }}
+          className="md:hidden bg-white border-t overflow-hidden"
+        >
+          <div className="px-6 py-4">
+            <div className="flex flex-col gap-4">
+              {[
+                { href: "#home", label: "Home" },
+                { href: "#packages", label: "Packages" },
+                { href: "#gallery", label: "Gallery" },
+                { href: "#contact", label: "Contact" }
+              ].map((item, index) => (
+                <motion.a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium"
+                  variants={{
+                    open: {
+                      opacity: 1,
+                      y: 0,
+                      transition: { delay: index * 0.1 }
+                    },
+                    closed: {
+                      opacity: 0,
+                      y: 20,
+                    }
+                  }}
+                >
+                  {item.label}
+                </motion.a>
+              ))}
+              
+              {/* Additional mobile menu items */}
+              <motion.div
+                variants={{
+                  open: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { delay: 0.4 }
+                  },
+                  closed: {
+                    opacity: 0,
+                    y: 20,
+                  }
+                }}
+                className="pt-4 mt-4 border-t border-gray-100"
+              >
+                <a 
+                  href="tel:+16094259512"
+                  className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors mb-4"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  (609) 425-9512
+                </a>
+                <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-xl font-semibold hover:shadow-lg transition-all">
+                  Book Now
+                </button>
+              </motion.div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </nav>
 
       {/* Hero Section */}
