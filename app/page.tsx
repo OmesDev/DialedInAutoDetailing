@@ -52,7 +52,7 @@ export default function Home() {
     <div className="min-h-screen bg-[#fafafa] font-[family-name:var(--font-geist-sans)]">
       {/* Navbar */}
       <nav className="fixed w-full bg-white/90 backdrop-blur-md shadow-md z-50 transition-all duration-300">
-        <div className="w-full container mx-auto px-4 sm:px-6 py-4">
+        <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             {/* Logo Section */}
             <div className="flex items-center gap-2">
@@ -173,7 +173,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-br from-gray-900 via-black to-blue-900 pt-20">
+      <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-br from-gray-900 via-black to-blue-900 pt-20 overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[url('/grid.png')] opacity-10" />
@@ -182,7 +182,7 @@ export default function Home() {
           <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-black to-transparent" />
         </div>
 
-        <div className="w-full container mx-auto px-4 sm:px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center max-w-full">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -316,7 +316,7 @@ export default function Home() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="relative w-full pb-12 sm:pb-16"
+            className="relative w-full pb-12 sm:pb-16 px-0"
           >
             <div className="relative aspect-[9/16] w-full lg:w-[calc(800px*9/16)] mx-auto rounded-2xl overflow-hidden shadow-2xl">
               {/* Videos */}
@@ -404,8 +404,8 @@ export default function Home() {
       </section>
 
       {/* Packages Section */}
-      <section id="packages" className="py-32 bg-gradient-to-b from-[#fafafa] to-white w-full">
-        <div className="w-full container mx-auto px-4 sm:px-6">
+      <section id="packages" className="py-32 bg-gradient-to-b from-[#fafafa] to-white">
+        <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
