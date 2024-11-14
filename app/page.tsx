@@ -463,15 +463,13 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                icon: "✨",
                 title: "Expert Craftsmanship",
                 description: "Our master detailers average 10+ years of experience, trained in the latest techniques and certified by industry leaders. Every vehicle receives the attention it deserves.",
                 image: "/images/detail1.jpg",
-                stats: ["5+ Years", "Experience"],
+                stats: ["4+ Years", "Experience"],
                 delay: 0.1
               },
               {
-                icon: "🛡️",
                 title: "Premium Products",
                 description: "We exclusively use professional-grade products from industry-leading brands. Our ceramic coatings and protection systems are backed by extensive testing and warranties.",
                 image: "/images/detail2.jpg",
@@ -479,7 +477,6 @@ export default function Home() {
                 delay: 0.2
               },
               {
-                icon: "🔍",
                 title: "Meticulous Process",
                 description: "Our systematic approach ensures no detail is overlooked. From paint correction to interior restoration, we follow proven processes that deliver consistent excellence.",
                 image: "/images/detail3.jpg",
@@ -518,9 +515,6 @@ export default function Home() {
                   {/* Enhanced Content Container */}
                   <div className="p-8">
                     <div className="flex flex-col items-center text-center gap-4 mb-6">
-                      <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                        <span className="text-3xl">{feature.icon}</span>
-                      </div>
                       <h3 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors duration-500">
                         {feature.title}
                       </h3>
@@ -635,8 +629,7 @@ export default function Home() {
                     "Interior Deep Clean"
                   ],
                   description: "Our signature full-service detailing package",
-                  featured: true,
-                  image: "/images/full-detail.jpg"
+                  featured: true
                 },
                 {
                   name: "Interior Dial",
@@ -651,8 +644,7 @@ export default function Home() {
                     "Glass Cleaning",
                     "Floor Mat Cleaning"
                   ],
-                  description: "Comprehensive interior detailing service",
-                  image: "/images/interior-detail.jpg"
+                  description: "Comprehensive interior detailing service"
                 },
                 {
                   name: "Exterior Dial",
@@ -662,13 +654,12 @@ export default function Home() {
                     truck: 160
                   },
                   features: [
-                    "Hand Wash & Dry",
-                    "Paint Decontamination",
-                    "Tire & Wheel Cleaning",
-                    "Glass Cleaning"
+                    "Iron Decontamination & Bug/Tar Removal",
+                    "Wheels & Tires Cleaned & Dressed",
+                    "Ceramic Seal/Wax Hand Application",
+                    "Complete Exterior Hand Wash"
                   ],
-                  description: "Complete exterior detailing service",
-                  image: "/images/exterior-detail.jpg"
+                  description: "Complete exterior detailing service"
                 }
               ].map((service, index) => (
                 <motion.div
@@ -680,31 +671,19 @@ export default function Home() {
                   className="group relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className={`relative rounded-2xl overflow-hidden border transition-all duration-500 h-full ${
+                  <div className={`relative rounded-2xl overflow-hidden border transition-all duration-500 h-full flex flex-col ${
                     service.featured 
                       ? 'bg-gradient-to-br from-blue-600 to-purple-600 border-blue-500/50' 
                       : 'bg-gray-900/90 border-gray-800/50 hover:border-blue-500/30'
                   }`}>
-                    {/* Image Section */}
-                    <div className="relative h-48 overflow-hidden">
-                      <Image
-                        src={service.image}
-                        alt={service.name}
-                        fill
-                        className="object-cover transform group-hover:scale-110 transition-transform duration-700"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent" />
-                      
-                      {/* Package Name Overlay */}
-                      <div className="absolute bottom-4 left-4">
-                        <h4 className="text-2xl font-bold text-white mb-1">{service.name}</h4>
+                    <div className="p-8 flex flex-col flex-grow">
+                      {/* Package Name and Description */}
+                      <div className="text-center mb-8">
+                        <h4 className="text-2xl font-bold text-white mb-2">{service.name}</h4>
                         <p className="text-gray-300 text-sm">{service.description}</p>
                       </div>
-                    </div>
 
-                    {/* Pricing Grid */}
-                    <div className="p-6">
+                      {/* Pricing Grid */}
                       <div className="grid grid-cols-3 gap-4 mb-6">
                         <div className="text-center">
                           <div className="text-lg font-bold text-white">${service.prices.sedan}</div>
@@ -721,10 +700,10 @@ export default function Home() {
                       </div>
 
                       {/* Features List */}
-                      <div className="space-y-3 mb-6">
+                      <div className="space-y-3 mb-6 flex-grow">
                         {service.features.map((feature, idx) => (
                           <div key={idx} className="flex items-center gap-2 text-gray-300">
-                            <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-5 h-5 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                             </svg>
                             {feature}
@@ -733,7 +712,7 @@ export default function Home() {
                       </div>
 
                       {/* Book Button */}
-                      <button className={`w-full py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 ${
+                      <button className={`w-full py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 mt-auto ${
                         service.featured
                           ? 'bg-white text-blue-600 hover:bg-gray-100'
                           : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg hover:shadow-blue-500/25'
@@ -757,11 +736,11 @@ export default function Home() {
               <p className="text-gray-400">Customize your detail with these premium add-ons</p>
             </div>
             
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid sm:grid-cols-2 gap-6">
               {[
                 {
                   name: "Heated Seat Steam",
-                  price: "From $50",
+                  price: "$150",
                   icon: "🔥",
                   description: "Deep clean & sanitize seats"
                 },
@@ -770,30 +749,6 @@ export default function Home() {
                   price: "$25",
                   icon: "🐕",
                   description: "Thorough pet hair extraction"
-                },
-                {
-                  name: "Wheel & Tire Shine",
-                  price: "$15",
-                  icon: "🛞",
-                  description: "Premium tire dressing"
-                },
-                {
-                  name: "Acid Strip Treatment",
-                  price: "$75",
-                  icon: "⚗️",
-                  description: "Paint decontamination"
-                },
-                {
-                  name: "Steam Carpet Clean",
-                  price: "$30",
-                  icon: "💨",
-                  description: "Deep carpet extraction"
-                },
-                {
-                  name: "Leather Treatment",
-                  price: "From $50",
-                  icon: "🛋️",
-                  description: "Clean & condition leather"
                 }
               ].map((addon, index) => (
                 <motion.div
