@@ -182,84 +182,178 @@ export default function Home() {
           <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-black to-transparent" />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center max-w-full">
-          {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
-            {/* Decorative Elements */}
-            <div className="absolute -left-20 -top-20 w-40 h-40 bg-blue-500/20 rounded-full blur-[100px]" />
-            <div className="absolute -right-20 -bottom-20 w-40 h-40 bg-purple-500/20 rounded-full blur-[100px]" />
-            <div className="absolute left-1/2 top-1/2 w-40 h-40 bg-blue-400/10 rounded-full blur-[100px]" />
-            
-            {/* Subtitle with enhanced styling */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mb-8"
-            >
-              <span className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm text-blue-400 font-semibold tracking-wider text-sm uppercase py-2 px-4 rounded-full border border-blue-400/20 inline-flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
-                Professional Auto Detailing Services
-              </span>
-            </motion.div>
-
-            {/* Main Title with enhanced styling */}
-            <h1 className="text-6xl sm:text-7xl font-bold mb-8 text-white leading-[1.1]">
-              Transform Your{" "}
-              <span className="relative inline-block">
-                <span className="bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent">
-                  Vehicle
-                </span>
-                <motion.span
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ delay: 0.5, duration: 0.8 }}
-                  className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-500 transform origin-left"
-                />
-              </span>{" "}
-              <span className="relative inline-block">
-                <span className="bg-gradient-to-r from-white via-gray-200 to-gray-300 bg-clip-text text-transparent">
-                  Into Art
-                </span>
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: "100%" }}
-                  transition={{ delay: 0.8, duration: 0.8 }}
-                  className="absolute -z-10 bottom-0 left-0 h-[0.5em] bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-sm"
-                />
-              </span>
-            </h1>
-
-            {/* Description with enhanced styling */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="text-xl text-gray-300 mb-12 leading-relaxed max-w-xl font-light"
-            >
-              Experience automotive perfection through our meticulous detailing process. 
-              We don&apos;t just clean cars – we restore their beauty and protect their finish 
-              with unmatched attention to detail.
-            </motion.p>
-
-            {/* CTA Buttons with enhanced styling */}
+        <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
+            {/* Left Content */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 mb-16"
+              transition={{ duration: 0.8 }}
+              className="relative"
             >
-              <button className="group relative bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 hover:from-blue-700 hover:via-blue-600 hover:to-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] flex items-center justify-center gap-2 border border-blue-500/20 overflow-hidden">
-                <span className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/30 to-blue-400/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
-                <span className="relative flex items-center gap-2">
-                  Book Your Detail
+              {/* Decorative Elements */}
+              <div className="absolute -left-20 -top-20 w-40 h-40 bg-blue-500/20 rounded-full blur-[100px]" />
+              <div className="absolute -right-20 -bottom-20 w-40 h-40 bg-purple-500/20 rounded-full blur-[100px]" />
+              <div className="absolute left-1/2 top-1/2 w-40 h-40 bg-blue-400/10 rounded-full blur-[100px]" />
+              
+              {/* Subtitle with enhanced styling */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                className="mb-8"
+              >
+                <span className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm text-blue-400 font-semibold tracking-wider text-sm uppercase py-2 px-4 rounded-full border border-blue-400/20 inline-flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                  Professional Auto Detailing Services
+                </span>
+              </motion.div>
+
+              {/* Main Title with enhanced styling */}
+              <h1 className="text-6xl sm:text-7xl font-bold mb-8 text-white leading-[1.1]">
+                Transform Your{" "}
+                <span className="relative inline-block">
+                  <span className="bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent">
+                    Vehicle
+                  </span>
+                  <motion.span
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ delay: 0.5, duration: 0.8 }}
+                    className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-500 transform origin-left"
+                  />
+                </span>{" "}
+                <span className="relative inline-block">
+                  <span className="bg-gradient-to-r from-white via-gray-200 to-gray-300 bg-clip-text text-transparent">
+                    Into Art
+                  </span>
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: "100%" }}
+                    transition={{ delay: 0.8, duration: 0.8 }}
+                    className="absolute -z-10 bottom-0 left-0 h-[0.5em] bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-sm"
+                  />
+                </span>
+              </h1>
+
+              {/* Description with enhanced styling */}
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="text-xl text-gray-300 mb-12 leading-relaxed max-w-xl font-light"
+              >
+                Experience automotive perfection through our meticulous detailing process. 
+                We don&apos;t just clean cars – we restore their beauty and protect their finish 
+                with unmatched attention to detail.
+              </motion.p>
+
+              {/* CTA Buttons with enhanced styling */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="flex flex-col sm:flex-row gap-4 mb-16"
+              >
+                <button className="group relative bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 hover:from-blue-700 hover:via-blue-600 hover:to-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] flex items-center justify-center gap-2 border border-blue-500/20 overflow-hidden">
+                  <span className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/30 to-blue-400/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
+                  <span className="relative flex items-center gap-2">
+                    Book Your Detail
+                    <svg 
+                      className="w-5 h-5 transform transition-transform group-hover:translate-x-1" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={2} 
+                        d="M13 7l5 5m0 0l-5 5m5-5H6" 
+                      />
+                    </svg>
+                  </span>
+                </button>
+                <button className="group relative bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all border border-white/10 hover:border-white/20 flex items-center justify-center gap-2 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] overflow-hidden">
+                  <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
+                  <span className="relative flex items-center gap-2">
+                    View Services
+                    <span className="transform transition-transform group-hover:translate-x-1">→</span>
+                  </span>
+                </button>
+              </motion.div>
+
+              {/* Stats with enhanced styling */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+                className="grid grid-cols-3 gap-8 border-t border-white/10 pt-8"
+              >
+                {[
+                  { value: "500+", label: "Cars Detailed" },
+                  { value: "5⭐", label: "Rating" },
+                  { value: "100%", label: "Satisfaction" }
+                ].map((stat, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 + index * 0.1 }}
+                    className="relative group"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-lg blur-xl group-hover:bg-blue-500/10 transition-all duration-300" />
+                    <div className="relative">
+                      <div className="text-4xl font-bold text-white mb-2">{stat.value}</div>
+                      <div className="text-gray-400 text-sm font-medium">{stat.label}</div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
+
+            {/* Right Content - Video Carousel */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="relative w-full pb-12 sm:pb-16 px-0 flex justify-center"
+            >
+              <div className="relative aspect-[9/16] w-full lg:w-[calc(800px*9/16)] rounded-2xl overflow-hidden shadow-2xl">
+                {/* Videos */}
+                {slides.map((slide, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ 
+                      opacity: currentSlide === index ? 1 : 0,
+                      scale: currentSlide === index ? 1 : 1.1,
+                      x: `${(index - currentSlide) * 100}%`
+                    }}
+                    transition={{ duration: 0.7, ease: "easeInOut" }}
+                    className="absolute inset-0 w-full"
+                  >
+                    <video
+                      src={slide.src}
+                      poster={slide.thumbnail}
+                      className="w-full h-full object-cover rounded-2xl"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                    />
+                    {/* Subtle gradient overlay for better text contrast */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  </motion.div>
+                ))}
+
+                {/* Navigation Arrows - Hidden on smaller screens */}
+                <button 
+                  onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/20 hover:bg-black/40 p-2 rounded-full transition-all hidden sm:block"
+                >
                   <svg 
-                    className="w-5 h-5 transform transition-transform group-hover:translate-x-1" 
+                    className="w-6 h-6 text-white" 
                     fill="none" 
                     stroke="currentColor" 
                     viewBox="0 0 24 24"
@@ -268,138 +362,46 @@ export default function Home() {
                       strokeLinecap="round" 
                       strokeLinejoin="round" 
                       strokeWidth={2} 
-                      d="M13 7l5 5m0 0l-5 5m5-5H6" 
+                      d="M15 19l-7-7 7-7" 
                     />
                   </svg>
-                </span>
-              </button>
-              <button className="group relative bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all border border-white/10 hover:border-white/20 flex items-center justify-center gap-2 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] overflow-hidden">
-                <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
-                <span className="relative flex items-center gap-2">
-                  View Services
-                  <span className="transform transition-transform group-hover:translate-x-1">→</span>
-                </span>
-              </button>
-            </motion.div>
-
-            {/* Stats with enhanced styling */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-              className="grid grid-cols-3 gap-8 border-t border-white/10 pt-8"
-            >
-              {[
-                { value: "500+", label: "Cars Detailed" },
-                { value: "5⭐", label: "Rating" },
-                { value: "100%", label: "Satisfaction" }
-              ].map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 + index * 0.1 }}
-                  className="relative group"
+                </button>
+                <button 
+                  onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/20 hover:bg-black/40 p-2 rounded-full transition-all hidden sm:block"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-lg blur-xl group-hover:bg-blue-500/10 transition-all duration-300" />
-                  <div className="relative">
-                    <div className="text-4xl font-bold text-white mb-2">{stat.value}</div>
-                    <div className="text-gray-400 text-sm font-medium">{stat.label}</div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Right Content - Video Carousel */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative w-full pb-12 sm:pb-16 px-0"
-          >
-            <div className="relative aspect-[9/16] w-full lg:w-[calc(800px*9/16)] mx-auto rounded-2xl overflow-hidden shadow-2xl">
-              {/* Videos */}
-              {slides.map((slide, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0 }}
-                  animate={{ 
-                    opacity: currentSlide === index ? 1 : 0,
-                    scale: currentSlide === index ? 1 : 1.1,
-                    x: `${(index - currentSlide) * 100}%`
-                  }}
-                  transition={{ duration: 0.7, ease: "easeInOut" }}
-                  className="absolute inset-0 w-full"
-                >
-                  <video
-                    src={slide.src}
-                    poster={slide.thumbnail}
-                    className="w-full h-full object-cover rounded-2xl"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                  {/* Subtle gradient overlay for better text contrast */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                </motion.div>
-              ))}
-
-              {/* Navigation Arrows - Hidden on smaller screens */}
-              <button 
-                onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/20 hover:bg-black/40 p-2 rounded-full transition-all hidden sm:block"
-              >
-                <svg 
-                  className="w-6 h-6 text-white" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M15 19l-7-7 7-7" 
-                  />
-                </svg>
-              </button>
-              <button 
-                onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/20 hover:bg-black/40 p-2 rounded-full transition-all hidden sm:block"
-              >
-                <svg 
-                  className="w-6 h-6 text-white" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M9 5l7 7-7 7" 
-                  />
-                </svg>
-              </button>
-              
-              {/* Enhanced Slide Indicators */}
-              <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
-                {slides.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    className={`h-2 rounded-full transition-all duration-500 ${
-                      currentSlide === index 
-                        ? 'w-10 bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)]' 
-                        : 'w-2 bg-white/50 hover:bg-white/80'
-                    }`}
-                  />
-                ))}
+                  <svg 
+                    className="w-6 h-6 text-white" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M9 5l7 7-7 7" 
+                    />
+                  </svg>
+                </button>
+                
+                {/* Enhanced Slide Indicators */}
+                <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
+                  {slides.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentSlide(index)}
+                      className={`h-2 rounded-full transition-all duration-500 ${
+                        currentSlide === index 
+                          ? 'w-10 bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)]' 
+                          : 'w-2 bg-white/50 hover:bg-white/80'
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
