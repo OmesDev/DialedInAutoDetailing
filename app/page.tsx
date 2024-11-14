@@ -46,7 +46,7 @@ export default function Home() {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   return (
     <div className="min-h-screen bg-[#fafafa] font-[family-name:var(--font-geist-sans)]">
@@ -243,7 +243,7 @@ export default function Home() {
               className="text-xl text-gray-300 mb-12 leading-relaxed max-w-xl font-light"
             >
               Experience automotive perfection through our meticulous detailing process. 
-              We don't just clean cars – we restore their beauty and protect their finish 
+              We don&apos;t just clean cars – we restore their beauty and protect their finish 
               with unmatched attention to detail.
             </motion.p>
 
