@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 type Slide = {
   type: 'video';
@@ -104,16 +105,32 @@ export default function Home() {
                   Home
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transform scale-x-0 transition-transform group-hover:scale-x-100"></span>
                 </a>
-                <a href="#packages" className="text-gray-600 hover:text-blue-600 transition-colors relative group py-2">
-                  Packages
+                <a href="#services" className="text-gray-600 hover:text-blue-600 transition-colors relative group py-2">
+                  Services
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transform scale-x-0 transition-transform group-hover:scale-x-100"></span>
                 </a>
-                <a href="#gallery" className="text-gray-600 hover:text-blue-600 transition-colors relative group py-2">
-                  Gallery
+                <a 
+                  href="https://instagram.com/dialedindetailing_" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-gray-600 hover:text-blue-600 transition-colors relative group py-2 flex items-center gap-1"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
+                  Instagram
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transform scale-x-0 transition-transform group-hover:scale-x-100"></span>
                 </a>
-                <a href="#contact" className="text-gray-600 hover:text-blue-600 transition-colors relative group py-2">
-                  Contact
+                <a 
+                  href="https://www.facebook.com/profile.php?id=100095190717861" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-gray-600 hover:text-blue-600 transition-colors relative group py-2 flex items-center gap-1"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                  </svg>
+                  Facebook
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transform scale-x-0 transition-transform group-hover:scale-x-100"></span>
                 </a>
               </div>
@@ -137,9 +154,9 @@ export default function Home() {
                   </svg>
                   (609) 425-9512
                 </a>
-                <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300">
+                <Link href="/booking" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300">
                   Book Now
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -164,12 +181,12 @@ export default function Home() {
                   />
                 </svg>
               </a>
-              <a 
-                href="#book-now"
+              <Link 
+                href="/booking"
                 className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1.5 rounded-full text-sm font-medium hover:shadow-lg transition-all flex items-center justify-center"
               >
                 Book Now
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -188,16 +205,37 @@ export default function Home() {
             <div className="flex flex-col gap-4">
               {[
                 { href: "#home", label: "Home" },
-                { href: "#packages", label: "Packages" },
-                { href: "#gallery", label: "Gallery" },
-                { href: "#contact", label: "Contact" }
+                { href: "#services", label: "Services" },
+                { 
+                  href: "https://instagram.com/getdialeddetail", 
+                  label: "Instagram",
+                  icon: (
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                  ),
+                  external: true
+                },
+                { 
+                  href: "https://facebook.com/getdialeddetail", 
+                  label: "Facebook",
+                  icon: (
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                    </svg>
+                  ),
+                  external: true
+                }
               ].map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noopener noreferrer" : undefined}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium"
+                  className="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium flex items-center gap-2"
                 >
+                  {item.icon && item.icon}
                   {item.label}
                 </a>
               ))}
@@ -213,8 +251,13 @@ export default function Home() {
                   </svg>
                   (609) 425-9512
                 </a>
-                <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-xl font-semibold hover:shadow-lg transition-all">
-                  Book Now
+                <button 
+                  onClick={() => setIsMobileMenuOpen(false)} 
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-xl font-semibold hover:shadow-lg transition-all"
+                >
+                  <Link href="/booking" className="w-full block">
+                    Book Now
+                  </Link>
                 </button>
               </div>
             </div>
@@ -305,7 +348,7 @@ export default function Home() {
                 transition={{ delay: 0.6 }}
                 className="flex flex-col sm:flex-row gap-4 mb-16"
               >
-                <button className="group relative bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 hover:from-blue-700 hover:via-blue-600 hover:to-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] flex items-center justify-center gap-2 border border-blue-500/20 overflow-hidden">
+                <Link href="/booking" className="group relative bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 hover:from-blue-700 hover:via-blue-600 hover:to-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] flex items-center justify-center gap-2 border border-blue-500/20 overflow-hidden">
                   <span className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/30 to-blue-400/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
                   <span className="relative flex items-center gap-2">
                     Book Your Detail
@@ -323,7 +366,7 @@ export default function Home() {
                       />
                     </svg>
                   </span>
-                </button>
+                </Link>
                 <button 
                   onClick={() => {
                     document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
@@ -535,7 +578,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-sm rounded-2xl border border-gray-800/50 hover:border-blue-500/30 transition-all duration-500 h-full overflow-hidden">
                   {/* Enhanced Image Container */}
-                  <div className="relative h-56 overflow-hidden rounded-t-2xl">
+                  <div className="relative h-64 overflow-hidden">
                     <Image
                       src={feature.image}
                       alt={feature.title}
@@ -545,37 +588,44 @@ export default function Home() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent" />
                     
-                    {/* Stats Overlay */}
-                    <div className="absolute bottom-4 right-4 bg-black/30 backdrop-blur-md rounded-lg px-3 py-2 border border-white/10">
+                    {/* Stats Overlay - Moved to top right */}
+                    <div className="absolute top-4 right-4 bg-black/30 backdrop-blur-md rounded-lg px-3 py-2 border border-white/10">
                       <div className="text-2xl font-bold text-white">{feature.stats[0]}</div>
                       <div className="text-xs text-gray-300">{feature.stats[1]}</div>
                     </div>
-                  </div>
 
-                  {/* Enhanced Content Container */}
-                  <div className="p-8">
-                    <div className="flex flex-col items-center text-center gap-4 mb-6">
+                    {/* Title Overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-gray-900 to-transparent">
                       <h3 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors duration-500">
                         {feature.title}
                       </h3>
                     </div>
-                    <p className="text-gray-400 leading-relaxed text-center">
+                  </div>
+
+                  {/* Enhanced Content Container */}
+                  <div className="p-6">
+                    <p className="text-gray-400 leading-relaxed">
                       {feature.description}
                     </p>
                     
-                    {/* Added Learn More Link */}
-                    <div className="mt-6 text-center">
-                      <a href="#" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
+                    {/* Learn More Link */}
+                    <div className="mt-6 flex justify-end">
+                      <a 
+                        href="#" 
+                        className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors group/link"
+                      >
                         Learn More
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg 
+                          className="w-4 h-4 transform transition-transform group-hover/link:translate-x-1" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          viewBox="0 0 24 24"
+                        >
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </a>
                     </div>
                   </div>
-                  
-                  {/* Enhanced Hover Effect */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-2xl" />
                 </div>
               </motion.div>
             ))}
@@ -589,8 +639,8 @@ export default function Home() {
             viewport={{ once: true }}
             className="mt-20 text-center"
           >
-            <a
-              href="#book-now"
+            <Link
+              href="/booking"
               className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] transition-all hover:scale-105 group"
             >
               Experience the Difference
@@ -607,7 +657,7 @@ export default function Home() {
                   d="M13 7l5 5m0 0l-5 5m5-5H6"
                 />
               </svg>
-            </a>
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -653,7 +703,7 @@ export default function Home() {
 
           {/* Main Packages */}
           <div className="mb-20">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
               {[
                 {
                   name: "Full Dial",
@@ -752,61 +802,21 @@ export default function Home() {
                       </div>
 
                       {/* Book Button */}
-                      <button className={`w-full py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 mt-auto ${
-                        service.featured
-                          ? 'bg-white text-blue-600 hover:bg-gray-100'
-                          : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg hover:shadow-blue-500/25'
-                      }`}>
+                      <Link 
+                        href="/booking"
+                        className={`w-full py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 mt-auto ${
+                          service.featured
+                            ? 'bg-white text-blue-600 hover:bg-gray-100'
+                            : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg hover:shadow-blue-500/25'
+                        }`}
+                      >
                         Book Now
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                         </svg>
-                      </button>
+                      </Link>
                     </div>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Add-ons Section */}
-          <div>
-            <div className="text-center mb-12">
-              <h3 className="text-2xl font-bold text-white mb-2">Enhancement Services</h3>
-              <p className="text-gray-400">Customize your detail with these premium add-ons</p>
-            </div>
-            
-            <div className="grid sm:grid-cols-2 gap-6">
-              {[
-                {
-                  name: "Heated Seat Steam",
-                  price: "$150",
-                  icon: "🔥",
-                  description: "Deep clean & sanitize seats"
-                },
-                {
-                  name: "Pet Hair Removal",
-                  price: "$25",
-                  icon: "🐕",
-                  description: "Thorough pet hair extraction"
-                }
-              ].map((addon, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="group relative bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 hover:shadow-xl transition-all duration-300 border border-gray-800/50 hover:border-blue-500/30"
-                >
-                  <div className="absolute -inset-px bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
-                  <div className="text-3xl mb-4">{addon.icon}</div>
-                  <h4 className="text-lg font-semibold mb-2 text-white">{addon.name}</h4>
-                  <p className="text-gray-400 text-sm mb-3">{addon.description}</p>
-                  <p className="text-blue-400 font-medium mb-4">{addon.price}</p>
-                  <button className="w-full py-2 px-4 rounded-lg bg-gray-800/50 text-gray-300 hover:bg-gray-800 transition-all duration-300 border border-gray-700 hover:border-blue-500/30">
-                    Add Service
-                  </button>
                 </motion.div>
               ))}
             </div>
