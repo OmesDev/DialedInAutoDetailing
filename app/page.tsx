@@ -54,6 +54,23 @@ export default function Home() {
       <nav className="fixed w-full bg-white/90 backdrop-blur-md shadow-md z-50 transition-all duration-300">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
+            {/* Mobile Menu Button - Moved to left */}
+            <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors md:hidden">
+              <svg 
+                className="w-5 h-5 text-black"
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M4 6h16M4 12h16M4 18h16" 
+                />
+              </svg>
+            </button>
+
             {/* Logo Section */}
             <div className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-xl">
@@ -115,22 +132,34 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
-              <svg 
-                className="w-6 h-6" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
+            {/* Mobile Action Buttons - Removed menu button */}
+            <div className="flex items-center gap-3 md:hidden">
+              <a 
+                href="tel:+16094259512" 
+                className="p-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:from-blue-500/20 hover:to-purple-500/20 transition-all border border-blue-500/20"
+                aria-label="Call us"
               >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M4 6h16M4 12h16M4 18h16" 
-                />
-              </svg>
-            </button>
+                <svg 
+                  className="w-4 h-4 text-blue-600" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" 
+                  />
+                </svg>
+              </a>
+              <a 
+                href="#book-now"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1.5 rounded-full text-sm font-medium hover:shadow-lg transition-all flex items-center justify-center"
+              >
+                Book Now
+              </a>
+            </div>
           </div>
         </div>
 
@@ -148,25 +177,6 @@ export default function Home() {
             </a>
             <a href="#contact" className="text-gray-600 hover:text-blue-600 transition-colors">
               Contact
-            </a>
-            <a 
-              href="tel:+16094259512" 
-              className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors"
-            >
-              <svg 
-                className="w-4 h-4" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" 
-                />
-              </svg>
-              (609) 425-9512
             </a>
           </div>
         </div>
@@ -201,7 +211,7 @@ export default function Home() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
-                className="mb-8"
+                className="mb-4 mt-4 sm:mt-0"
               >
                 <span className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm text-blue-400 font-semibold tracking-wider text-sm uppercase py-2 px-4 rounded-full border border-blue-400/20 inline-flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
