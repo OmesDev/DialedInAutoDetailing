@@ -176,29 +176,13 @@ export default function Home() {
 
         {/* Enhanced Mobile Menu */}
         <motion.div 
-          initial="closed"
-          animate={isMobileMenuOpen ? "open" : "closed"}
-          variants={{
-            open: { 
-              opacity: 1,
-              height: "auto",
-              transition: {
-                type: "spring",
-                stiffness: 300,
-                damping: 30
-              }
-            },
-            closed: { 
-              opacity: 0,
-              height: 0,
-              transition: {
-                type: "spring",
-                stiffness: 300,
-                damping: 30
-              }
-            }
+          initial={{ opacity: 0 }}
+          animate={{ 
+            opacity: isMobileMenuOpen ? 1 : 0,
+            display: isMobileMenuOpen ? "block" : "none"
           }}
-          className="md:hidden bg-white border-t overflow-hidden"
+          transition={{ duration: 0.2 }}
+          className="md:hidden bg-white/95 backdrop-blur-md border-t absolute top-full left-0 right-0 shadow-lg"
         >
           <div className="px-6 py-4">
             <div className="flex flex-col gap-4">
@@ -207,43 +191,19 @@ export default function Home() {
                 { href: "#packages", label: "Packages" },
                 { href: "#gallery", label: "Gallery" },
                 { href: "#contact", label: "Contact" }
-              ].map((item, index) => (
-                <motion.a
+              ].map((item) => (
+                <a
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium"
-                  variants={{
-                    open: {
-                      opacity: 1,
-                      y: 0,
-                      transition: { delay: index * 0.1 }
-                    },
-                    closed: {
-                      opacity: 0,
-                      y: 20,
-                    }
-                  }}
                 >
                   {item.label}
-                </motion.a>
+                </a>
               ))}
               
               {/* Additional mobile menu items */}
-              <motion.div
-                variants={{
-                  open: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { delay: 0.4 }
-                  },
-                  closed: {
-                    opacity: 0,
-                    y: 20,
-                  }
-                }}
-                className="pt-4 mt-4 border-t border-gray-100"
-              >
+              <div className="pt-4 mt-4 border-t border-gray-100">
                 <a 
                   href="tel:+16094259512"
                   className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors mb-4"
@@ -256,7 +216,7 @@ export default function Home() {
                 <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-xl font-semibold hover:shadow-lg transition-all">
                   Book Now
                 </button>
-              </motion.div>
+              </div>
             </div>
           </div>
         </motion.div>
