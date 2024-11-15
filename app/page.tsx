@@ -8,7 +8,6 @@ import Link from "next/link";
 type Slide = {
   type: 'video';
   src: string;
-  thumbnail: string;
 };
 
 export default function Home() {
@@ -19,27 +18,22 @@ export default function Home() {
     {
       type: 'video',
       src: '/videos/detail1.mp4',
-      thumbnail: '/thumbnails/detail1.jpg'
     },
     {
       type: 'video',
       src: '/videos/detail2.mp4',
-      thumbnail: '/thumbnails/detail2.jpg'
     },
     {
       type: 'video',
       src: '/videos/detail3.mp4',
-      thumbnail: '/thumbnails/detail3.jpg'
     },
     {
       type: 'video',
       src: '/videos/detail4.mp4',
-      thumbnail: '/thumbnails/detail4.jpg'
     },
     {
       type: 'video',
       src: '/videos/detail5.mp4',
-      thumbnail: '/thumbnails/detail5.jpg'
     },
   ];
 
@@ -433,7 +427,7 @@ export default function Home() {
                   >
                     <video
                       src={slide.src}
-                      poster={slide.thumbnail}
+                      // poster={slide.thumbnail}
                       className="w-full h-full object-cover rounded-2xl"
                       autoPlay
                       loop

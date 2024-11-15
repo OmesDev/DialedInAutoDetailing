@@ -3,9 +3,11 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Link from "next/link";
+import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isToday, isBefore, addMonths, subMonths } from 'date-fns';
 
 type VehicleType = 'sedan' | 'suv' | 'truck';
 type LocationType = 'mobile' | 'shop';
+type TimeSlot = '9:00 AM' | '11:00 AM' | '1:00 PM' | '3:00 PM';
 
 interface Service {
   name: string;
@@ -31,11 +33,27 @@ interface AddOn {
   description: string;
 }
 
+interface CoatingTier {
+  name: string;
+  price: {
+    sedan: number;
+    suv: number;
+    truck: number;
+  };
+  icon: string;
+  description: string;
+  features: string[];
+}
+
 export default function Booking() {
   const [selectedVehicle, setSelectedVehicle] = useState<VehicleType>('sedan');
   const [selectedLocation, setSelectedLocation] = useState<LocationType>('shop');
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
+  const [selectedCoating, setSelectedCoating] = useState<string | null>(null);
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
 
   const services: Service[] = [
     {
@@ -116,6 +134,75 @@ export default function Booking() {
     }
   ];
 
+  const coatingTiers: CoatingTier[] = [
+    {
+      name: "System X Crystal SS",
+      price: {
+        sedan: 750,
+        suv: 900,
+        truck: 1000
+      },
+      icon: "✨",
+      description: "Entry-level ceramic coating with excellent protection",
+      features: [
+        "2-3 years protection",
+        "Enhanced gloss",
+        "Paint correction included",
+        "Hydrophobic properties"
+      ]
+    },
+    {
+      name: "System X Diamond SS",
+      price: {
+        sedan: 1200,
+        suv: 1400,
+        truck: 1550
+      },
+      icon: "💎",
+      description: "Premium ceramic coating with superior durability",
+      features: [
+        "4-5 years protection",
+        "Superior hardness",
+        "Enhanced paint correction",
+        "Advanced chemical resistance"
+      ]
+    },
+    {
+      name: "System X Max",
+      price: {
+        sedan: 1750,
+        suv: 1900,
+        truck: 2000
+      },
+      icon: "🌟",
+      description: "Professional-grade ceramic coating system",
+      features: [
+        "6-7 years protection",
+        "Maximum gloss retention",
+        "Multi-stage paint correction",
+        "Supreme chemical resistance"
+      ]
+    },
+    {
+      name: "System X Max G+",
+      price: {
+        sedan: 2200,
+        suv: 2350,
+        truck: 2500
+      },
+      icon: "👑",
+      description: "Ultimate ceramic coating protection",
+      features: [
+        "7+ years protection",
+        "Highest gloss finish",
+        "Premium paint correction",
+        "Ultimate scratch resistance"
+      ]
+    }
+  ];
+
+  const timeSlots: TimeSlot[] = ['9:00 AM', '11:00 AM', '1:00 PM', '3:00 PM'];
+
   const calculateTotal = () => {
     if (!selectedService) return 0;
     
@@ -133,7 +220,20 @@ export default function Booking() {
       }
     });
 
+    if (selectedCoating) {
+      const coating = coatingTiers.find(c => c.name === selectedCoating);
+      if (coating) {
+        total += coating.price[selectedVehicle];
+      }
+    }
+
     return total;
+  };
+
+  const getDaysInMonth = (date: Date) => {
+    const start = startOfMonth(date);
+    const end = endOfMonth(date);
+    return eachDayOfInterval({ start, end });
   };
 
   return (
@@ -203,7 +303,7 @@ export default function Booking() {
                 onClick={() => setSelectedVehicle(type)}
                 className={`p-4 rounded-xl border transition-all ${
                   selectedVehicle === type
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 border-blue-500'
+                    ? 'bg-blue-600 border-blue-500'
                     : 'bg-gray-900/50 border-gray-800 hover:border-blue-500/50'
                 } text-white capitalize`}
               >
@@ -213,58 +313,7 @@ export default function Booking() {
           </div>
         </motion.div>
 
-        {/* Location Selection */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
-          className="mb-12"
-        >
-          <h2 className="text-xl font-semibold text-white mb-4">Service Location</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {(['shop', 'mobile'] as LocationType[]).map((type) => (
-              <button
-                key={type}
-                onClick={() => setSelectedLocation(type)}
-                className={`p-6 rounded-xl border transition-all ${
-                  selectedLocation === type
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 border-blue-500'
-                    : 'bg-gray-900/50 border-gray-800 hover:border-blue-500/50'
-                } text-white`}
-              >
-                <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
-                  {type === 'shop' ? (
-                    <svg className="w-8 h-8 sm:w-6 sm:h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
-                  ) : (
-                    <svg className="w-8 h-8 sm:w-6 sm:h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  )}
-                  <div className="flex-1">
-                    <div className="text-lg font-semibold mb-1">
-                      <span className="capitalize">{type} Service</span>
-                    </div>
-                    <div className="text-sm text-gray-400">
-                      {type === 'shop' 
-                        ? 'Drop off at our location in Cape May County' 
-                        : 'We come to you (Cape May County area)'}
-                    </div>
-                  </div>
-                </div>
-                {selectedLocation === type && (
-                  <div className="mt-4 pt-4 border-t border-white/10 text-sm text-blue-300">
-                    {type === 'shop' 
-                      ? '📍 1234 Ocean Drive, Cape May, NJ' 
-                      : '🚗 Additional travel fee included in price'}
-                  </div>
-                )}
-              </button>
-            ))}
-          </div>
-        </motion.div>
+
 
         {/* Services Selection */}
         <motion.div
@@ -281,7 +330,7 @@ export default function Booking() {
                 onClick={() => setSelectedService(service.name)}
                 className={`relative p-6 rounded-xl border transition-all ${
                   selectedService === service.name
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 border-blue-500'
+                    ? 'bg-blue-600 border-blue-500'
                     : 'bg-gray-900/50 border-gray-800 hover:border-blue-500/50'
                 } text-left`}
               >
@@ -293,7 +342,7 @@ export default function Booking() {
                 <ul className="space-y-2">
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center gap-2 text-gray-300 text-sm">
-                      <svg className="w-4 h-4 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                       {feature}
@@ -327,16 +376,169 @@ export default function Booking() {
                   }}
                   className={`p-6 rounded-xl border transition-all text-left ${
                     selectedAddOns.includes(addon.name)
-                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 border-blue-500'
+                      ? 'bg-blue-600 border-blue-500'
                       : 'bg-gray-900/50 border-gray-800 hover:border-blue-500/50'
                   }`}
                 >
                   <div className="text-3xl mb-4">{addon.icon}</div>
                   <h4 className="text-lg font-semibold text-white mb-2">{addon.name}</h4>
                   <p className="text-gray-400 text-sm mb-2">{addon.description}</p>
-                  <p className="text-blue-400 font-medium">${addon.price}</p>
+                  <p className="text-emerald-400 font-medium">${addon.price}</p>
                 </button>
               ))}
+            </div>
+          </motion.div>
+        )}
+
+        {/* Add Ceramic Coating Selection */}
+        {selectedService && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mb-12"
+          >
+            <h2 className="text-xl font-semibold text-white mb-4">Ceramic Coating Options</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {coatingTiers.map((coating) => (
+                <button
+                  key={coating.name}
+                  onClick={() => setSelectedCoating(coating.name === selectedCoating ? null : coating.name)}
+                  className={`p-6 rounded-xl border transition-all text-left ${
+                    selectedCoating === coating.name
+                      ? 'bg-blue-600 border-blue-500'
+                      : 'bg-gray-900/50 border-gray-800 hover:border-blue-500/50'
+                  }`}
+                >
+                  <div className="text-3xl mb-4">{coating.icon}</div>
+                  <h4 className="text-lg font-semibold text-white mb-2">{coating.name}</h4>
+                  <p className="text-gray-400 text-sm mb-4">{coating.description}</p>
+                  <p className="text-emerald-400 font-semibold mb-4">
+                    ${coating.price[selectedVehicle]}
+                  </p>
+                  <ul className="space-y-2">
+                    {coating.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center gap-2 text-gray-300 text-sm">
+                        <svg className="w-4 h-4 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
+        {/* Schedule Your Service */}
+        {selectedService && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mb-12"
+          >
+            <h2 className="text-xl font-semibold text-white mb-4">Select a Date & Time</h2>
+            
+            <div className="bg-gray-900/50 rounded-xl border border-gray-800 p-6">
+              {/* Calendar Header */}
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-lg font-medium text-white">
+                  {format(currentMonth, 'MMMM yyyy')}
+                </h3>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setCurrentMonth(prev => subMonths(prev, 1))}
+                    className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+                  >
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => setCurrentMonth(prev => addMonths(prev, 1))}
+                    className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+                  >
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              {/* Calendar Grid */}
+              <div className="grid grid-cols-7 gap-1 mb-4">
+                {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map(day => (
+                  <div key={day} className="text-center text-sm font-medium text-gray-400 py-2">
+                    {day}
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-7 gap-1">
+                {getDaysInMonth(currentMonth).map((day, idx) => {
+                  const isSelected = selectedDate && format(selectedDate, 'yyyy-MM-dd') === format(day, 'yyyy-MM-dd');
+                  const isDisabled = isBefore(day, new Date()) && !isToday(day);
+                  const dayNumber = format(day, 'd');
+                  
+                  return (
+                    <button
+                      key={day.toString()}
+                      onClick={() => !isDisabled && setSelectedDate(day)}
+                      disabled={isDisabled}
+                      className={`
+                        p-3 rounded-lg text-center transition-all
+                        ${isDisabled ? 'text-gray-600 cursor-not-allowed' : 'hover:bg-blue-500/20'}
+                        ${isSelected ? 'bg-blue-500 text-white' : 'text-gray-300'}
+                        ${!isSameMonth(day, currentMonth) ? 'text-gray-600' : ''}
+                      `}
+                    >
+                      {dayNumber}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Time Slots */}
+              {selectedDate && (
+                <div className="mt-6 border-t border-gray-800 pt-6">
+                  <h4 className="text-white font-medium mb-4">Available Times</h4>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {['9:00 AM', '11:00 AM', '1:00 PM', '3:00 PM'].map(time => (
+                      <button
+                        key={time}
+                        onClick={() => setSelectedTime(time === selectedTime ? null : time)}
+                        className={`
+                          p-3 rounded-lg text-center transition-all
+                          ${selectedTime === time 
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-gray-800/50 text-gray-300 hover:bg-blue-500/20'
+                          }
+                        `}
+                      >
+                        {time}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Selected Schedule Summary */}
+              {selectedDate && selectedTime && (
+                <div className="mt-6 p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <p className="text-gray-300">
+                      <span className="font-medium text-white">Selected Schedule: </span>
+                      {format(selectedDate, 'MMMM d, yyyy')} at {selectedTime}
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           </motion.div>
         )}
