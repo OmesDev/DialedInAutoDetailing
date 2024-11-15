@@ -128,9 +128,15 @@ export default function Booking() {
     },
     {
       name: "Pet Hair Removal",
-      price: 25,
+      price: 50,
       icon: "🐕",
       description: "Thorough pet hair extraction"
+    },
+    {
+      name: "1 Step Polish",
+      price: 150,
+      icon: "✨",
+      description: "Paint enhancement & swirl removal"
     }
   ];
 
