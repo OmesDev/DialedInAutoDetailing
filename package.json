@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@stripe/stripe-js": "^4.10.0",
+    "@supabase/supabase-js": "^2.46.1",
     "date-fns": "^4.1.0",
     "framer-motion": "^11.11.15",
     "next": "15.0.3",

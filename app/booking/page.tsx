@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import Link from "next/link";
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isToday, isBefore, addMonths, subMonths } from 'date-fns';
+import { loadStripe } from '@stripe/stripe-js';
 
 type VehicleType = 'sedan' | 'suv' | 'truck';
 type LocationType = 'mobile' | 'shop';
@@ -44,6 +45,8 @@ interface CoatingTier {
   description: string;
   features: string[];
 }
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 export default function Booking() {
   const [selectedVehicle, setSelectedVehicle] = useState<VehicleType>('sedan');
@@ -234,6 +237,47 @@ export default function Booking() {
     const start = startOfMonth(date);
     const end = endOfMonth(date);
     return eachDayOfInterval({ start, end });
+  };
+
+  const handleCheckout = async () => {
+    if (!selectedDate || !selectedTime) {
+      alert('Please select a date and time for your appointment');
+      return;
+    }
+
+    try {
+      const stripe = await stripePromise;
+      if (!stripe) throw new Error('Stripe failed to initialize');
+
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          services: {
+            mainService: selectedService,
+            addOns: selectedAddOns,
+            coating: selectedCoating,
+          },
+          total: calculateTotal(),
+          selectedDate: format(selectedDate, 'MMMM d, yyyy'),
+          selectedTime,
+        }),
+      });
+
+      const { sessionId } = await response.json();
+      const result = await stripe.redirectToCheckout({
+        sessionId,
+      });
+
+      if (result.error) {
+        throw new Error(result.error.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Something went wrong. Please try again.');
+    }
   };
 
   return (
@@ -555,7 +599,10 @@ export default function Booking() {
               <h3 className="text-xl font-semibold text-white">Total</h3>
               <div className="text-3xl font-bold text-white">${calculateTotal()}</div>
             </div>
-            <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all">
+            <button 
+              onClick={handleCheckout}
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+            >
               Proceed to Payment
             </button>
           </motion.div>
