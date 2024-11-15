@@ -5,36 +5,36 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-type Slide = {
+type VideoSlide = {
   type: 'video';
-  src: string;
+  cdnUrl: string;
 };
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
-  const slides: Slide[] = [
+  const slides: VideoSlide[] = [
     {
       type: 'video',
-      src: '/videos/detail1.mp4',
+      cdnUrl: 'https://cdn.discordapp.com/attachments/809634316488540161/1306840157781233766/detail1.mp4?ex=6738213d&is=6736cfbd&hm=9039b381a84127c268a860ecaaee788b0b6e025e7b0b500eb8c2b93a400ae028&'
     },
     {
       type: 'video',
-      src: '/videos/detail2.mp4',
+      cdnUrl: 'https://cdn.discordapp.com/attachments/809634316488540161/1306841587719864320/detail2.mp4?ex=67382292&is=6736d112&hm=48b4810d1c3a2953f3ed9a5bfeb4bab5c553fdda73cfd3446d541dac3840aa9f&'
     },
     {
       type: 'video',
-      src: '/videos/detail3.mp4',
+      cdnUrl: 'https://cdn.discordapp.com/attachments/809634316488540161/1306841599938138122/detail3.mp4?ex=67382295&is=6736d115&hm=50c17abb15c2b65cba313a54a44662c6eaf9d5d6ab47868a6f0941881979936c&'
     },
     {
       type: 'video',
-      src: '/videos/detail4.mp4',
+      cdnUrl: 'https://cdn.discordapp.com/attachments/809634316488540161/1306841615150612641/detail4.mp4?ex=67382298&is=6736d118&hm=72f6059d91fe758301382f029905752662cf8af2564d914a84caef79f7cf5c87&'
     },
     {
       type: 'video',
-      src: '/videos/detail5.mp4',
-    },
+      cdnUrl: 'https://cdn.discordapp.com/attachments/809634316488540161/1306841626576158730/detail5.mp4?ex=6738229b&is=6736d11b&hm=313a7d304f11b61dfbb2a88f2be9aeb1ff2f2b393487bcaca51a5539e9cccfa7&'
+    }
   ];
 
   useEffect(() => {
@@ -426,8 +426,7 @@ export default function Home() {
                     className="absolute inset-0 w-full"
                   >
                     <video
-                      src={slide.src}
-                      // poster={slide.thumbnail}
+                      src={slide.cdnUrl}
                       className="w-full h-full object-cover rounded-2xl"
                       autoPlay
                       loop
