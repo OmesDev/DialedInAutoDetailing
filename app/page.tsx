@@ -154,11 +154,11 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Mobile Action Buttons - Removed menu button */}
+            {/* Mobile Action Buttons */}
             <div className="flex items-center gap-3 md:hidden">
               <a 
                 href="tel:+16094259512" 
-                className="p-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:from-blue-500/20 hover:to-purple-500/20 transition-all border border-blue-500/20"
+                className="p-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:from-blue-500/20 hover:to-purple-500/20 transition-all border border-blue-500/20 hidden sm:[400px]:flex"
                 aria-label="Call us"
               >
                 <svg 
