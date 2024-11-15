@@ -236,6 +236,12 @@ export default function Booking() {
     return eachDayOfInterval({ start, end });
   };
 
+  const getEmptyDays = (date: Date) => {
+    const start = startOfMonth(date);
+    const day = start.getDay(); // 0-6, 0 is Sunday
+    return Array(day).fill(null);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black relative pt-24 overflow-x-hidden">
       {/* Add Back Arrow */}
@@ -363,7 +369,7 @@ export default function Booking() {
             className="mb-12"
           >
             <h2 className="text-xl font-semibold text-white mb-4">Enhancement Services</h2>
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
               {addOns.map((addon, index) => (
                 <button
                   key={addon.name}
@@ -374,23 +380,25 @@ export default function Booking() {
                         : [...prev, addon.name]
                     );
                   }}
-                  className={`p-6 rounded-xl border transition-all text-left ${
+                  className={`p-4 rounded-xl border transition-all text-left ${
                     selectedAddOns.includes(addon.name)
                       ? 'bg-blue-600 border-blue-500'
                       : 'bg-gray-900/50 border-gray-800 hover:border-blue-500/50'
                   }`}
                 >
-                  <div className="text-3xl mb-4">{addon.icon}</div>
-                  <h4 className="text-lg font-semibold text-white mb-2">{addon.name}</h4>
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-2xl">{addon.icon}</span>
+                    <h4 className="text-base font-semibold text-white">{addon.name}</h4>
+                  </div>
                   <p className="text-gray-400 text-sm mb-2">{addon.description}</p>
-                  <p className="text-emerald-400 font-medium">${addon.price}</p>
+                  <p className="text-emerald-400 font-medium text-sm">+${addon.price}</p>
                 </button>
               ))}
             </div>
           </motion.div>
         )}
 
-        {/* Add Ceramic Coating Selection */}
+        {/* Ceramic Coating Selection */}
         {selectedService && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -399,33 +407,28 @@ export default function Booking() {
             className="mb-12"
           >
             <h2 className="text-xl font-semibold text-white mb-4">Ceramic Coating Options</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
               {coatingTiers.map((coating) => (
                 <button
                   key={coating.name}
                   onClick={() => setSelectedCoating(coating.name === selectedCoating ? null : coating.name)}
-                  className={`p-6 rounded-xl border transition-all text-left ${
+                  className={`p-4 rounded-xl border transition-all text-left ${
                     selectedCoating === coating.name
                       ? 'bg-blue-600 border-blue-500'
                       : 'bg-gray-900/50 border-gray-800 hover:border-blue-500/50'
                   }`}
                 >
-                  <div className="text-3xl mb-4">{coating.icon}</div>
-                  <h4 className="text-lg font-semibold text-white mb-2">{coating.name}</h4>
-                  <p className="text-gray-400 text-sm mb-4">{coating.description}</p>
-                  <p className="text-emerald-400 font-semibold mb-4">
-                    ${coating.price[selectedVehicle]}
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-2xl">{coating.icon}</span>
+                    <div>
+                      <h4 className="text-base font-semibold text-white">{coating.name}</h4>
+                      <p className="text-sm text-gray-400">{coating.features[0]}</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-400 text-sm mb-2">{coating.description}</p>
+                  <p className="text-emerald-400 font-medium text-sm">
+                    +${coating.price[selectedVehicle]}
                   </p>
-                  <ul className="space-y-2">
-                    {coating.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-gray-300 text-sm">
-                        <svg className="w-4 h-4 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
                 </button>
               ))}
             </div>
@@ -471,16 +474,27 @@ export default function Booking() {
               {/* Calendar Grid */}
               <div className="grid grid-cols-7 gap-1 mb-4">
                 {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map(day => (
-                  <div key={day} className="text-center text-sm font-medium text-gray-400 py-2">
+                  <div key={day} className={`text-center text-sm font-medium py-2 ${
+                    day === 'SUN' || day === 'SAT' 
+                      ? 'text-red-400' 
+                      : 'text-gray-400'
+                  }`}>
                     {day}
                   </div>
                 ))}
               </div>
 
               <div className="grid grid-cols-7 gap-1">
+                {/* Render empty cells for days before the first of the month */}
+                {getEmptyDays(currentMonth).map((_, index) => (
+                  <div key={`empty-${index}`} className="p-3" />
+                ))}
+                
+                {/* Render the actual days */}
                 {getDaysInMonth(currentMonth).map((day, idx) => {
                   const isSelected = selectedDate && format(selectedDate, 'yyyy-MM-dd') === format(day, 'yyyy-MM-dd');
-                  const isDisabled = isBefore(day, new Date()) && !isToday(day);
+                  const isWeekend = day.getDay() === 0 || day.getDay() === 6;
+                  const isDisabled = isBefore(day, new Date()) || isWeekend;
                   const dayNumber = format(day, 'd');
                   
                   return (
@@ -493,6 +507,8 @@ export default function Booking() {
                         ${isDisabled ? 'text-gray-600 cursor-not-allowed' : 'hover:bg-blue-500/20'}
                         ${isSelected ? 'bg-blue-500 text-white' : 'text-gray-300'}
                         ${!isSameMonth(day, currentMonth) ? 'text-gray-600' : ''}
+                        ${isWeekend ? 'bg-gray-800/50' : ''}
+                        ${day.getDay() === 0 || day.getDay() === 6 ? 'text-red-400/50' : ''}
                       `}
                     >
                       {dayNumber}
@@ -549,15 +565,112 @@ export default function Booking() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 backdrop-blur-sm rounded-2xl p-8 border border-blue-500/20"
+            className="bg-gray-900 rounded-2xl p-8 border border-gray-800/50 shadow-xl"
           >
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-semibold text-white">Total</h3>
-              <div className="text-3xl font-bold text-white">${calculateTotal()}</div>
+            {/* Service Summary */}
+            <div className="space-y-4 mb-6">
+              <div className="flex justify-between items-center pb-4 border-b border-gray-800">
+                <div>
+                  <h3 className="text-lg text-gray-400">Selected Package</h3>
+                  <p className="text-xl font-semibold text-white">{selectedService}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-gray-400">Base Price</p>
+                  <p className="text-xl font-semibold text-white">
+                    ${selectedLocation === 'mobile' && services.find(s => s.name === selectedService)?.mobilePricing
+                      ? services.find(s => s.name === selectedService)?.mobilePricing![selectedVehicle]
+                      : services.find(s => s.name === selectedService)?.prices[selectedVehicle]}
+                  </p>
+                </div>
+              </div>
+
+              {/* Add-ons Summary */}
+              {selectedAddOns.length > 0 && (
+                <div className="space-y-2 pb-4 border-b border-gray-800">
+                  <p className="text-gray-400">Add-ons</p>
+                  {selectedAddOns.map(addon => {
+                    const addOnItem = addOns.find(a => a.name === addon);
+                    return (
+                      <div key={addon} className="flex justify-between items-center">
+                        <span className="text-gray-300 flex items-center gap-2">
+                          <span className="text-lg">{addOnItem?.icon}</span>
+                          {addon}
+                        </span>
+                        <span className="text-white font-medium">${addOnItem?.price}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* Coating Summary */}
+              {selectedCoating && (
+                <div className="pb-4 border-b border-gray-800">
+                  <p className="text-gray-400 mb-2">Ceramic Coating</p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-300 flex items-center gap-2">
+                      <span className="text-lg">
+                        {coatingTiers.find(c => c.name === selectedCoating)?.icon}
+                      </span>
+                      {selectedCoating}
+                    </span>
+                    <span className="text-white font-medium">
+                      ${coatingTiers.find(c => c.name === selectedCoating)?.price[selectedVehicle]}
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {/* Schedule Summary */}
+              {selectedDate && selectedTime && (
+                <div className="flex justify-between items-center pb-4 border-b border-gray-800">
+                  <div className="flex items-center gap-2 text-gray-300">
+                    <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span>{format(selectedDate, 'MMMM d, yyyy')}</span>
+                    <span className="text-gray-600">|</span>
+                    <span>{selectedTime}</span>
+                  </div>
+                </div>
+              )}
             </div>
-            <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all">
-              Proceed to Payment
-            </button>
+
+            {/* Total and Checkout Button */}
+            <div className="space-y-6">
+              <div className="flex justify-between items-center">
+                <div className="text-left">
+                  <p className="text-gray-400">Service Duration</p>
+                  <p className="text-lg font-semibold text-white">~2-3 Hours</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-gray-400">Total Amount</p>
+                  <p className="text-3xl font-bold text-white">
+                    ${calculateTotal()}
+                  </p>
+                </div>
+              </div>
+
+              <button 
+                className="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold 
+                  hover:bg-blue-700 transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                Proceed to Payment
+                <svg 
+                  className="w-5 h-5 transform transition-transform group-hover:translate-x-1" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M13 7l5 5m0 0l-5 5m5-5H6" 
+                  />
+                </svg>
+              </button>
+            </div>
           </motion.div>
         )}
       </div>
